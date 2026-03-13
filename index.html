@@ -1,0 +1,118 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jr.Louis的主页</title>
+    <meta name="slug" content="index">
+</head>
+<body>
+    <canvas id="bgCanvas"></canvas>
+    <canvas id="effectCanvas"></canvas>
+    <div class="grid-container">
+        <div class="left-col">
+            <div class="grid-item" id="area1">
+                <div class="pixel-text" id="pixelText"></div>
+            </div>
+            <div class="grid-item" id="area3">
+                <div class="quote-wrapper">
+                    <p class="quote-text">“谁也不知道中国太阳将飞多远，水娃他们将看到什么样的神奇世界，也许有一天他们对地球发出一声呼唤，要上千年才能得到回音。但水娃始终会牢记母亲行星上的一个叫中国的国度，牢记那个国度西部一片干旱土地上的一个小村庄，牢记村前的那条小路，他就是从那里启程的。”</p>
+                    <p class="quote-source">————《中国太阳》</p>
+                </div>
+                <div class="player-wrapper" id="playerWrapper">
+                    <div class="player-frame" id="playerFrame">
+                        <div class="player-meta" id="playerMeta">
+                            <div class="player-title" id="playerTitle">SoundHelix Song 1</div>
+                            <div class="player-artist" id="playerArtist">T. Schurger</div>
+                        </div>
+                        <!-- 播放进度条：显示于作者与播放控件之间，样式由 CSS 控制，进度由 main.js 更新 -->
+                        <div class="player-progress" id="playerProgress" role="progressbar" aria-label="播放进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                            <div class="player-progress-bar" id="playerProgressBar"></div>
+                        </div>
+                        <!-- 播放时长显示：左侧已播，右侧总时长 -->
+                        <div class="player-time" id="playerTime">
+                            <span id="playerTimeCurrent">00:00</span>
+                            <span class="player-time-hint"></span>
+                            <span id="playerTimeDuration">00:00</span>
+                        </div>
+                        <div class="player-controls">
+                            <div class="player-control-btn" id="playerPrev" role="button" tabindex="0">上一首</div>
+                            <div class="player-control-btn player-control-play" id="playerPlay" role="button" tabindex="0">播放</div>
+                            <div class="player-control-btn" id="playerNext" role="button" tabindex="0">下一首</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="grid-item" id="area2">
+                <div class="time-wrapper">
+                    <div class="time-row" id="timezone"></div>
+                    <div class="time-row" id="date"></div>
+                    <div class="time-row" id="lunar-date"></div>
+                    <div class="time-row" id="weekday-dayofyear"><span id="weekday"></span><span id="dayofyear"></span></div>
+                    <div class="time-row" id="time-hm"></div>
+                    <div class="time-row" id="time-sec-ms"><span id="time-s"></span><span id="time-ms"></span><span id="chinese-hour"></span></div>
+                </div>
+                <div class="visual-time-wrapper">
+                    <!-- 动态生成方块 -->
+                </div>
+            </div>
+            <div class="right-bottom">
+                <div class="grid-item" id="area4">
+                    <div class="location-grid" id="locationGrid">
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="homeIcon" aria-hidden="true"></div>
+                            <span class="location-text">Binhai, Tianjin</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="schoolIcon" aria-hidden="true"></div>
+                            <!-- 鼠标悬停显示  -->
+                            <a class="location-text hover-tooltip-anchor location-link" href="https://www.bupt.edu.cn/" target="_blank" rel="noopener noreferrer">BUPT Undergraduate ><span class="hover-tooltip">IoT Engineering, Grade 2024</span></a>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="zodiacIcon" aria-hidden="true"></div>
+                            <span class="location-text">Pisces</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="mbtiIcon" aria-hidden="true"></div>
+                            <span class="location-text">50%INTP + 50%INFP</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="qqIcon" aria-hidden="true"></div>
+                            <span class="location-text location-text-qq">3040708497</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="mailIcon" aria-hidden="true"></div>
+                            <!-- 鼠标悬停显示副油箱气泡 -->
+                            <span class="location-text location-text-mail hover-tooltip-anchor">
+                                liujiyuanlp@163.com 
+                                <span class="hover-tooltip"></span>
+                            </span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="pacmanIcon" aria-hidden="true"></div>
+                            <span class="location-text location-text-long">主 Python C++ Java JS Rust</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="monitorIcon" aria-hidden="true"></div>
+                            <span class="location-text location-text-long">Windows / Linux</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="heartIcon" aria-hidden="true"></div>
+                            <span class="location-text location-text-long">飞友 交通迷 音游人 数码控</span>
+                        </div>
+                        <div class="location-cell">
+                            <div class="pixel-icon" id="gamepadIcon" aria-hidden="true"></div>
+                            <span class="location-text location-text-long">Cities Skylines II / PUBG / Phigros / Arcaea / pjsk</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item" id="area5">
+            
+                    <div class="icon-grid" id="iconGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
