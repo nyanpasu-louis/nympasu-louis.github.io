@@ -1,0 +1,56 @@
+.nav-bar {
+  position: fixed;
+  left: 0;
+  bottom: var(--space-3);                                  /* 距底部间距 */
+
+  width: 100%;
+  height: calc(var(--nav-pill-height) * 1.1);             /* 容器高度 */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 100;
+}
+
+/* ═══ Dock容器══════════════════════════════════
+     包裹所有导航按钮
+     gap:按钮之间的间距 
+     padding:胶囊内边距 
+     ────────────────────────────────────────────────────── */
+.nav-segment {
+  display: flex; align-items: center; gap: 2px; padding: 4px;
+  background: var(--md-sys-color-surface-container);
+  border-radius: 999px;                                    
+}
+
+/* ═══ 单个导航按钮 ═════════════════════════════════════════
+     all: unset 清除所有默认样式（需自行定义所有样式）
+     高度由 --nav-pill-height控制
+     选中态（[aria-current="page"]）使用主色填充
+     ────────────────────────────────────────────────────── */
+.nav-pill {
+  all: unset;
+  display: flex; align-items: center; justify-content: center;
+  height: var(--nav-pill-height);                          /* 按钮高度 */
+  padding: 0 var(--space-2);                                /* 左右内边距 */
+  border-radius: 999px;
+  font-family: var(--font-stack);
+  font-size: 16px;                                         /* 按钮字号 */
+  font-weight: 550; line-height: 1; letter-spacing: 0.01em;
+  color: var(--md-sys-color-primary);
+  background: transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: background-color var(--m3-duration) var(--m3-easing),
+              color var(--m3-duration) var(--m3-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-pill:hover { background: #DCDAD8; color: var(--md-sys-color-primary); }
+.nav-pill:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 2px; }
+
+/* 选中态 */
+.nav-pill[aria-current="page"] {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.nav-pill[aria-current="page"]:hover { background: var(--md-sys-color-primary); }
