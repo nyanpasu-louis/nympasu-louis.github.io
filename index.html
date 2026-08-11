@@ -1,125 +1,224 @@
-<html>
-<head>
-   
+<!DOCTYPE html>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jr.Louis的主页</title>
-    <meta name="slug" content="index">
-     <link rel="stylesheet" href="style.css">
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你好喵</title>
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="css/style.css?v=4">   
+  <link rel="stylesheet" href="css/left.css?v=4">    
+  <link rel="stylesheet" href="css/time.css?v=4">   
+  <link rel="stylesheet" href="css/bottom.css?v=4">  
+  <link rel="stylesheet" href="css/weather.css?v=4"> 
+  <link rel="stylesheet" href="css/profiles.css?v=4">
+  <link rel="stylesheet" href="css/terminal.css?v=4">
+  <!-- ===== JS ===== -->
+  <script src="js/left.js" defer></script>   
+  <script src="js/time.js" defer></script>  
+  <script src="js/bottom.js" defer></script> 
+  <script src="js/weather.js" defer></script>
+  <script src="js/scroll-quote.js" defer></script>
+  <script src="js/intro.js" defer></script>
+  <script src="js/profiles.js" defer></script>
+  <script src="js/terminal.js" defer></script>
 </head>
 <body>
-    <canvas id="bgCanvas"></canvas>
-    <canvas id="effectCanvas"></canvas>
-    <div class="grid-container">
-        <div class="left-col">
-            <div class="grid-item" id="area1">
-                <div class="pixel-text" id="pixelText"></div>
-            </div>
-            <div class="grid-item" id="area3">
-                <div class="quote-wrapper">
-                    <p class="quote-text">“谁也不知道中国太阳将飞多远，水娃他们将看到什么样的神奇世界，也许有一天他们对地球发出一声呼唤，要上千年才能得到回音。但水娃始终会牢记母亲行星上的一个叫中国的国度，牢记那个国度西部一片干旱土地上的一个小村庄，牢记村前的那条小路，他就是从那里启程的。”</p>
-                    <p class="quote-source">————《中国太阳》</p>
-                </div>
-                <div class="player-wrapper" id="playerWrapper">
-                    <div class="player-frame" id="playerFrame">
-                        <div class="player-meta" id="playerMeta">
-                            <div class="player-title" id="playerTitle">SoundHelix Song 1</div>
-                            <div class="player-artist" id="playerArtist">T. Schurger</div>
-                        </div>
-                        <!-- 播放进度条：显示于作者与播放控件之间，样式由 CSS 控制，进度由 main.js 更新 -->
-                        <div class="player-progress" id="playerProgress" role="progressbar" aria-label="播放进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-                            <div class="player-progress-bar" id="playerProgressBar"></div>
-                        </div>
-                        <!-- 播放时长显示：左侧已播，右侧总时长 -->
-                        <div class="player-time" id="playerTime">
-                            <span id="playerTimeCurrent">00:00</span>
-                            <span class="player-time-hint"></span>
-                            <span id="playerTimeDuration">00:00</span>
-                        </div>
-                        <div class="player-controls">
-                            <div class="player-control-btn" id="playerPrev" role="button" tabindex="0">上一首</div>
-                            <div class="player-control-btn player-control-play" id="playerPlay" role="button" tabindex="0">播放</div>
-                            <div class="player-control-btn" id="playerNext" role="button" tabindex="0">下一首</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="right-col">
-            <div class="grid-item" id="area2">
-                <div class="time-wrapper">
-                    <div class="time-row" id="timezone"></div>
-                    <div class="time-row" id="date"></div>
-                    <div class="time-row" id="lunar-date"></div>
-                    <div class="time-row" id="weekday-dayofyear"><span id="weekday"></span><span id="dayofyear"></span></div>
-                    <div class="time-row" id="time-hm"></div>
-                    <div class="time-row" id="time-sec-ms"><span id="time-s"></span><span id="time-ms"></span><span id="chinese-hour"></span></div>
-                </div>
-                <div class="visual-time-wrapper">
-                    <!-- 动态生成方块 -->
-                </div>
-            </div>
-            <div class="right-bottom">
-                <div class="grid-item" id="area4">
-                    <div class="location-grid" id="locationGrid">
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="homeIcon" aria-hidden="true"></div>
-                            <span class="location-text">Binhai, Tianjin</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="schoolIcon" aria-hidden="true"></div>
-                            <!-- 鼠标悬停显示  -->
-                            <a class="location-text hover-tooltip-anchor location-link" href="https://www.bupt.edu.cn/" target="_blank" rel="noopener noreferrer">BUPT Undergraduate ><span class="hover-tooltip">IoT Engineering, Grade 2024</span></a>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="zodiacIcon" aria-hidden="true"></div>
-                            <span class="location-text">Pisces</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="mbtiIcon" aria-hidden="true"></div>
-                            <span class="location-text">50%INTP + 50%INFP</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="qqIcon" aria-hidden="true"></div>
-                            <span class="location-text location-text-qq">3040708497</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="mailIcon" aria-hidden="true"></div>
-                            <!-- 鼠标悬停显示副油箱气泡 -->
-                            <span class="location-text location-text-mail hover-tooltip-anchor">
-                                liujiyuanlp@163.com 
-                                <span class="hover-tooltip"></span>
-                            </span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="pacmanIcon" aria-hidden="true"></div>
-                            <span class="location-text location-text-long">主 Python 副 C++ Java JS Rust</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="monitorIcon" aria-hidden="true"></div>
-                            <span class="location-text location-text-long">Windows / Linux</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="heartIcon" aria-hidden="true"></div>
-                            <span class="location-text location-text-long">飞友 交通迷 音游人 数码控</span>
-                        </div>
-                        <div class="location-cell">
-                            <div class="pixel-icon" id="gamepadIcon" aria-hidden="true"></div>
-                            <span class="location-text location-text-long">Cities Skylines II / PUBG / Phigros / Arcaea / pjsk</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item" id="area5">
-            
-                    <div class="icon-grid" id="iconGrid"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-     <canvas id="bgCanvas"></canvas>
-    <script src="main.js"></script>
-</body>
-    
-</html>
 
+  <!-- ===== 壁纸背景层（最底层） ===== -->
+  <div class="wallpaper" id="wallpaper"></div>
+
+  <!-- =============== Home选项卡 =============== -->
+
+  <!-- ===== 滚动文字背景层 ===== -->
+  <div class="scrolling-quote" id="scrolling-quote" aria-hidden="true"></div>
+
+  <div class="home-content" id="home-content">
+    <div class="main-area">
+      <!-- ===== 左侧 ===== -->
+      <div class="home-left">
+        <!-- 问候语文字 -->
+        <div class="hello-text">
+          <span>你好</span>
+        </div>
+        <!-- 点阵 -->
+        <div class="home-dots" aria-hidden="true">
+        </div>
+      </div>
+
+      <!-- ===== 右侧 ===== -->
+      <div class="home-right">
+        <!-- 上方Widget -->
+        <div class="widget widget-wide">
+          <div class="time-widget">
+            <!-- 左侧：文本时间信息 -->
+            <div class="time-info">
+              <div class="time-row" id="ti-row1"></div>  
+              <div class="time-row" id="ti-row2"></div>  
+              <div class="time-row" id="ti-row3">        
+                <span class="clock" id="clock"></span>
+                <span class="shichen" id="shichen"></span>
+              </div>
+              <div class="time-row" id="ti-row4"></div>  
+              <div class="time-row" id="ti-row5"></div>  
+              <div class="time-row" id="ti-row6"></div>  
+            </div>
+            <!-- 右侧：点阵时钟 -->
+            <div class="time-visual">
+              <div class="dot-grid" id="dot-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 下方Widget -->
+        <div class="widgets-row">
+          <!-- 天气 -->
+          <div class="widget widget-square" id="weather-widget">
+            <div class="weather-content">
+              <!-- 天气文字信息 -->
+              <div class="weather-info">
+                <div class="time-row we-row" id="we-row1"></div>  
+                <div class="time-row we-row" id="we-row2"></div>  
+                <div class="time-row we-row" id="we-row3"></div>  
+                <div class="time-row we-row" id="we-row4"></div>  
+                <div class="time-row we-row" id="we-row5"></div>  
+                <div class="time-row we-row" id="we-row6"></div>  
+              </div>
+              <!-- 天气点阵 -->
+              <div class="weather-dot-grid" id="weather-dot-grid"></div>
+            </div>
+          </div>
+         
+
+  </div>
+</div>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== Intro选项卡（复刻Home内容） =============== -->
+  <div class="intro-content" id="intro-content">
+    <div class="main-area">
+      <!-- ===== 左侧 ===== -->
+      <div class="home-left">
+        <div class="hello-text intro-hello">
+          <span>你好</span>
+        </div>
+        <div class="home-dots intro-dots-el" aria-hidden="true"></div>
+      </div>
+
+      <!-- ===== 右侧 ===== -->
+      <div class="home-right">
+        <!-- 上方Widget -->
+        <div class="widget widget-wide">
+          <div class="intro-info-widget">
+            <div class="intro-info-left">
+              <div class="intro-info-row">06　Pisces　异性恋</div>
+              <div class="intro-info-row">BUPT Undergraduate</div>
+              <div class="intro-info-row">Windows/macOS/Linux</div>
+              <div class="intro-info-row">Python/Rust/前后端</div>
+              <div class="intro-info-row">交通迷（不混圈）</div>
+              <div class="intro-info-row">Cities: Skylines/PUBG/MC</div>
+            </div>
+            <div class="intro-info-right">
+              <div class="mbti-grid" id="intro-mbti-grid" aria-hidden="true"></div>
+              <div class="mbti-text-row">INFP/INTP　1w2</div>
+              <div class="mbti-text-row">Ti↑　Ne↑　Fi↑　Te→</div>
+              <div class="mbti-text-row">Ni↓　Si↓　Se↓　Fe→</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 下方Widget -->
+        <div class="widgets-row">
+          <div class="widget widget-square">
+            <div class="weather-content">
+              <div class="weather-info" id="intro-weather-info">
+                <div class="time-row we-row">家住沽上  久作北平旅</div>
+                <div class="time-row we-row">已点亮18省69市+国外4市</div>
+                <div class="time-row we-row">已点亮19座火车站 14座机场</div>
+                <div class="time-row we-row">国航C919乘坐者</div>
+                <div class="time-row we-row">CR400BF-5033乘坐者</div>
+                <div class="time-row we-row">65.5r忠实购买者</div>
+              </div>
+              <div class="weather-info">
+                <div class="time-row we-row">工科学习者</div>
+                <div class="time-row we-row">苹果奶绿拥护者</div>
+                <div class="time-row we-row">海棠热爱者</div>
+                <div class="time-row we-row">The Key循环者</div>
+                <div class="time-row we-row">CRH380D信仰者</div>
+                <div class="time-row we-row">天津地铁9号线深爱者</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== Option选项卡 =============== -->
+  <div class="options-panel" id="options-panel">
+    <h2 class="panel-title">选项</h2>
+
+    <!-- 主题色 -->
+    <section class="panel-section">
+      <h3 class="section-label">主题色</h3>
+      <div class="theme-swatches" id="theme-swatches">
+        <!-- 每个 data-color 对应 style.css 中 .swatch[data-color="..."] 的背景色 -->
+        <button class="swatch" data-color="pink"   aria-label="Pink theme"></button>
+        <button class="swatch" data-color="blue"   aria-label="Blue theme"></button>
+        <button class="swatch" data-color="red"    aria-label="Red theme"></button>
+        <button class="swatch" data-color="green"  aria-label="Green theme"></button>
+        <button class="swatch" data-color="yellow" aria-label="Yellow theme"></button>
+        <button class="swatch" data-color="orange" aria-label="Orange theme"></button>
+        <button class="swatch" data-color="purple" aria-label="Purple theme"></button>
+      </div>
+    </section>
+
+    <!-- 滤镜 -->
+    <section class="panel-section">
+      <h3 class="section-label">滤镜</h3>
+      <div class="filter-options" id="filter-options">
+        <!-- aria-pressed 标记当前选中的滤镜，由 right.js 控制切换 -->
+        <button class="filter-btn" data-filter="none"        aria-pressed="true">无</button>
+        <button class="filter-btn" data-filter="grayscale">黑白</button>
+        <button class="filter-btn" data-filter="invert">颜色反转</button>
+        <button class="filter-btn" data-filter="hue-symmetry">色相对称</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- =============== Terminal 面板 =============== -->
+  <div class="terminal-panel" id="terminal-panel">
+    <div class="terminal-output" id="terminal-output"></div>
+  </div>
+
+  <!-- =============== Profiles选项卡 =============== -->
+  <div class="profiles-panel" id="profiles-panel">
+    <div class="capsules-container" id="capsules-container"></div>
+  </div>
+
+  <!-- 微信公众号图片浮层 -->
+  <div class="image-overlay" id="wechat-overlay">
+    <button class="overlay-close" id="overlay-close" aria-label="关闭">&times;</button>
+    <img src="res/subs.jpg" alt="微信公众号" />
+  </div>
+
+  <!-- =============== 底部Dock =============== -->
+  <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+    <div class="nav-segment">
+      <button class="nav-pill" data-nav="home"     aria-current="page">Home</button>
+      <button class="nav-pill" data-nav="intro">    Intro</button>
+      <button class="nav-pill" data-nav="profiles"> Profiles</button>
+      <button class="nav-pill" data-nav="option">   Option</button>
+      <button class="nav-pill" data-nav="terminal"> Terminal</button>
+    </div>
+  </nav>
+
+  <!-- ===== 窄屏提示遮罩（屏幕宽度 ≤ 768px 时显示） ===== -->
+  <div class="narrow-overlay">请使用宽屏浏览喵</div>
+
+</body>
+</html>
