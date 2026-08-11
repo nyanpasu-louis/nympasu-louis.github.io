@@ -1,0 +1,142 @@
+/* ============================================================
+   Profiles 面板 — 社媒账号云朵胶囊
+   ============================================================ */
+
+/* ── 面板容器 ── */
+.profiles-panel {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: calc(
+    100vh - var(--nav-pill-height) - var(--space-3) * 1.35
+  );
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 360ms var(--m3-easing);
+}
+.profiles-panel.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── 胶囊容器 ── */
+.capsules-container {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: calc(
+    100vh - var(--nav-pill-height) - var(--space-3) * 1.35
+  );
+  overflow: hidden;
+}
+
+/* ── 单个胶囊 ── */
+.capsule {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 18px 30px;
+  border: none;
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-container);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  font-family: var(--font-stack);
+  color: var(--md-sys-color-on-surface);
+  animation: cloud-float var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite;
+  transition: transform 180ms var(--m3-easing),
+              background 180ms var(--m3-easing),
+              box-shadow 180ms var(--m3-easing);
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.capsule:hover {
+  transform: scale(1.08);
+  background: var(--md-sys-color-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.capsule:active {
+  transform: scale(0.96);
+}
+.capsule:hover .capsule-platform,
+.capsule:hover .capsule-nick {
+  color: var(--md-sys-color-on-primary);
+}
+
+/* 平台名 — 粗体 */
+.capsule-platform {
+  font-size: var(--plat-size, 22px);
+  font-weight: 650;
+  line-height: 1.2;
+  color: var(--md-sys-color-primary);
+}
+
+/* 昵称 — 小字正常体 */
+.capsule-nick {
+  font-size: var(--nick-size, 18px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--md-sys-color-text-secondary);
+}
+
+/* ── 云朵浮动 ── */
+@keyframes cloud-float {
+  0%, 100% { margin-top: 0; }
+  50%      { margin-top: calc(-1 * var(--float-amp, 8px)); }
+}
+
+/* ── 图片浮层（微信公众号） ── */
+.image-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,0.52);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms var(--m3-easing);
+}
+.image-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.image-overlay img {
+  max-width: 72vw;
+  max-height: 78vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+
+.overlay-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms var(--m3-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.overlay-close:hover {
+  background: rgba(255,255,255,0.38);
+}

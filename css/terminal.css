@@ -1,0 +1,68 @@
+/* ============================================================
+   Terminal 面板
+   ============================================================ */
+
+.terminal-panel {
+  position: fixed; top: var(--space-3); left: var(--space-3); right: var(--space-3); z-index: 200;
+  bottom: calc(var(--space-3) * 2 + var(--nav-pill-height) * 1.1);
+  border-radius: 24px;
+  background: var(--md-sys-color-surface-container);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--m3-duration) var(--m3-easing);
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+  user-select: text; -webkit-user-select: text;
+}
+.terminal-panel.visible { opacity: 1; pointer-events: auto; }
+
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-2) var(--space-3) 0 var(--space-3);
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", Menlo, Monaco, "Noto Sans SC", monospace;
+  font-size: 14px; line-height: 1.65;
+  color: var(--md-sys-color-on-surface);
+  white-space: pre-wrap; word-break: break-all;
+}
+.terminal-output::-webkit-scrollbar { width: 4px; }
+.terminal-output::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.25); border-radius: 2px; }
+
+/* ── 输出行样式 ─────────────────────── */
+.term-line { margin-bottom: 2px; }
+.term-line-input  { color: var(--md-sys-color-primary); }
+.term-line-output { color: var(--md-sys-color-on-surface); }
+.term-line-error  { color: var(--md-sys-color-primary); font-weight: 600; }
+.term-line-info   { color: var(--md-sys-color-primary); }
+.term-line-dim    { color: var(--md-sys-color-text-secondary); }
+
+/* ── 内联提示行 ─────────────────────── */
+.term-prompt-line {
+  display: flex; align-items: center;
+  padding: 1px 0;
+}
+.term-prompt-inline {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", Menlo, Monaco, "Noto Sans SC", monospace;
+  font-size: 14px; line-height: 1.65;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
+  margin-right: 6px;
+}
+.term-input-inline {
+  flex: 1;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", Menlo, Monaco, monospace;
+  font-size: 14px; line-height: 1.65;
+  color: var(--md-sys-color-on-surface);
+  background: transparent; border: none; outline: none;
+  caret-color: var(--md-sys-color-primary);
+}
+.term-input-inline::placeholder { color: var(--md-sys-color-text-secondary); opacity: 0.4; }
+
+@media (max-width: 768px) {
+  .terminal-panel {
+    top: var(--space-2); left: var(--space-2); right: var(--space-2);
+    bottom: calc(var(--space-2) * 2 + var(--nav-pill-height) * 1.1);
+  }
+  .terminal-output { padding: var(--space-2) var(--space-2) 0 var(--space-2); font-size: 14px; }
+}

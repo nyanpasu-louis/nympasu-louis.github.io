@@ -1,0 +1,213 @@
+.home-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+/* ═══ Widget 通用样式 ═══════════════════════════════════════
+     所有 Widget 卡片共用：圆角数值、表面色填充、弹性布局
+     ────────────────────────────────────────────────────── */
+.widget {
+  background: var(--md-sys-color-surface-container);
+  border-radius: 24px;                                     /* 卡片圆角 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── 并排 Widget 行容器 ──────────────────────────────────── */
+.widgets-row {
+  display: flex;
+  gap: var(--space-3);
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── 方形 Widget ─────────────────────────────────────────── */
+.widget-square {
+  flex: 1;
+}
+
+/* ── Widget 占位标签 ─────────────────────────────────────── */
+.widget-label {
+  font-family: var(--font-stack);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-text-secondary);
+}
+
+/* ═════ 时间卡片 ══════ */
+
+/* ═════ 个人介绍卡片 ══════ */
+.intro-info-widget {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.intro-info-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.intro-info-row {
+  font-family: var(--font-stack);
+  font-weight: 520;
+  font-size: 21px;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.intro-info-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mbti-grid {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2px;
+  width: 100%;
+  min-height: 0;
+}
+
+.mbti-grid .dot {
+  border-radius: 50%;
+  background: var(--md-sys-color-hello-text);
+  opacity: 0.30;
+  aspect-ratio: 1;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.mbti-grid .dot.filled {
+  background: var(--md-sys-color-primary);
+  opacity: 1;
+}
+
+.mbti-text-row {
+  font-family: var(--font-stack);
+  font-weight: 520;
+  font-size: 21px;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
+  line-height: 1;
+  text-align: center;
+}
+
+/* 时间卡片容器 */
+.time-widget {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+/* ── 左侧：文字时间信息 ── */
+.time-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0;
+}
+
+/* 时间文字 */
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 520;
+  font-size: 21px;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ── 联动高亮效果 ──────────────────────────────────────────
+     由 right.js 控制，根据点阵悬停位置高亮对应的时间数字
+     ────────────────────────────────────────────────────── */
+.hl-text {
+  transition: color var(--m3-duration) var(--m3-easing);
+}
+.hl-text.highlight {
+  color: var(--md-sys-color-on-surface);                   /* 高亮色 */
+}
+
+/* ── 时分秒 ───────────────────────── */
+.clock {
+  font-weight: 520;
+  color: var(--md-sys-color-primary);
+  white-space: nowrap;
+  line-height: 1;
+  margin-right: var(--space-1);
+}
+
+/* ── 时辰 ────────────────────────────────────────────── */
+.shichen {
+  font-weight: 520;
+  color: var(--md-sys-color-primary);
+}
+
+/* ── 点阵时钟 ── */
+.time-visual {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 16px;                                               /* 行间额外间距 */
+  padding: 0;
+}
+
+/* 点阵网格容器 */
+.dot-grid {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);                  /* 列 */
+  grid-template-rows: repeat(12, 1fr);                     /* 行 */
+  gap: 2px;                                                /* 点之间的间距 */
+  width: 100%;
+  height: 100%;
+  transition: opacity 500ms var(--m3-easing);
+}
+
+/* 点阵中的单个圆点 */
+.dot-grid .dot {
+  border-radius: 50%;
+  background: var(--md-sys-color-hello-text);
+  opacity: 0.30;                                           /* 未点亮时的透明度 */
+  /* 确保永远是正圆形，且在非正方形网格单元中居中 */
+  aspect-ratio: 1;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+/* 点亮状态 */
+.dot-grid .dot.filled {
+  background: var(--md-sys-color-primary);
+  opacity: 1;
+}
+
+/* 脉冲动画（点亮时的放大回弹效果） */
+.dot-grid .dot.pulse {
+  animation: dot-pulse 320ms var(--m3-easing);             /* 动画时长 */
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.35); }                     /* 放大倍率 */
+}

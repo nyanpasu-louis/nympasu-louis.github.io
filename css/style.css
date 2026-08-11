@@ -1,0 +1,252 @@
+/* ============================================================
+   全局基础样式 — 字体、颜色令牌、CSS 变量、布局重置
+   ============================================================ */
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('res/googlesans.ttf') format('truetype');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('res/notosans.ttf') format('truetype');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --font-stack: "Google Sans", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+
+  /* ═══ M3 风格颜色令牌 ═══ */
+  --md-sys-color-background:          #B0B0B0;
+  /* 将容器背景调整为半透明，以便透出背景文字与毛玻璃效果 */
+  --md-sys-color-surface-container:   rgba(191, 191, 189, 0.65);
+  --md-sys-color-on-surface:          #2A2A2C;
+  --md-sys-color-on-surface-variant:  #6B6A68;
+  --md-sys-color-primary:             #5A5A58;
+  --md-sys-color-on-primary:          #FFFFFF;
+  --md-sys-color-text-secondary:      #727270;
+
+  --nav-pill-height: 36px;
+  --m3-easing:   cubic-bezier(0.2, 0, 0, 1);
+  --m3-duration: 240ms;
+
+  --dot-size: 8px;
+  --dot-gap: 10px;
+  --dot-columns: 7;
+  --dot-rows: 5;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100vw; height: 100vh; overflow: hidden;
+  font-family: var(--font-stack);
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* ═══ 壁纸背景层（修复语法错误） ══════════════════════════ */
+.wallpaper {
+  position: fixed; 
+  inset: 0; 
+  z-index: 0;
+  background-color: var(--md-sys-color-background);
+}
+
+/* ═══ 面板容器 ═════════════════════════════════════════════ */
+.options-panel {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); z-index: 200;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  padding: var(--space-4);
+  background: var(--md-sys-color-surface-container);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--m3-duration) var(--m3-easing);
+}
+.options-panel.visible { opacity: 1; pointer-events: auto; }
+
+.panel-title {
+  font-family: var(--font-stack);
+  font-size: 18px; font-weight: 600;
+  color: var(--md-sys-color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.panel-section { margin-bottom: var(--space-3); }
+.panel-section:last-child { margin-bottom: 0; }
+
+.section-label {
+  font-family: var(--font-stack);
+  font-size: 12px; font-weight: 600;
+  color: var(--md-sys-color-text-secondary);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+}
+
+/* ═══ 主题色选择器 ═══════════════════════════════════════ */
+.theme-swatches { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+
+.swatch {
+  all: unset; width: 34px; height: 34px;
+  border-radius: 50%; cursor: pointer; position: relative;
+  transition: transform 0.15s var(--m3-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.swatch:hover  { transform: scale(1.15); }
+.swatch:active { transform: scale(0.95); }
+.swatch[aria-pressed="true"]::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2.5px solid var(--md-sys-color-on-surface);
+}
+
+.swatch[data-color="pink"]   { background: #CDA5A5; }
+.swatch[data-color="blue"]   { background: #98ACBE; }
+.swatch[data-color="red"]    { background: #C59E9E; }
+.swatch[data-color="green"]  { background: #A2B4A0; }
+.swatch[data-color="yellow"] { background: #C4BFA0; }
+.swatch[data-color="orange"] { background: #C8AD9E; }
+.swatch[data-color="purple"] { background: #AD9EB8; }
+
+/* ═══ 滤镜按钮 ═════════════════════════════════════════════ */
+.filter-options { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.filter-btn {
+  all: unset;
+  padding: var(--space-1) var(--space-2); border-radius: 999px;
+  font-family: var(--font-stack);
+  font-size: 13px; font-weight: 500;
+  color: var(--md-sys-color-text-secondary);
+  background: transparent; cursor: pointer;
+  transition: background-color var(--m3-duration) var(--m3-easing),
+              color var(--m3-duration) var(--m3-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.filter-btn:hover { background: #DCDAD8; color: var(--md-sys-color-primary); }
+.filter-btn:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 2px; }
+
+.filter-btn[aria-pressed="true"] {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+
+.narrow-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-primary);
+  font-family: var(--font-stack);
+  font-size: 36px;
+  font-weight: 650;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ═══ 响应式断点 ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-bar { height: calc(var(--nav-pill-height) + var(--space-3)); }
+  .nav-pill { font-size: 13px; padding: 0 var(--space-2); }
+  .narrow-overlay { display: flex; }
+
+  .home-content {
+    height: auto; top: 0; left: 0; right: 0;
+    bottom: calc(var(--nav-pill-height) + var(--space-3) * 2);
+    width: auto;
+  }
+  .main-area { display: flex; flex-direction: column; }
+  .home-left { position: relative; height: 80px; overflow: hidden; }
+  .hello-text { position: absolute; left: var(--space-2); bottom: var(--space-2); }
+  .hello-text span { font-size: 36px; }
+  .home-dots { display: none; }
+  .home-right { flex: none; gap: var(--space-1); padding: var(--space-2); }
+  .widget { flex: none; }
+  .widget-wide { aspect-ratio: auto; width: 100%; height: 100px; }
+  .widget-square { aspect-ratio: auto; height: 100px; }
+  .widgets-row { flex: none; }
+}
+
+@media (max-width: 480px) {
+  .nav-bar { height: calc(var(--nav-pill-height) + var(--space-3)); }
+  .nav-pill { font-size: 12px; padding: 0 var(--space-1); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   滚动文字背景层 — 透明 mask 渐隐与背景透出
+   ============================================================ */
+.scrolling-quote {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+  background: transparent; /* 完全透明，露出底部 wallpaper */
+
+  /* 透明过渡 */
+  -webkit-mask-image:
+    linear-gradient(to right, black 0%, black 52%, transparent 62%),
+    linear-gradient(to bottom, black 0%, black 59%, transparent 69%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, black 0%, black 52%, transparent 62%),
+    linear-gradient(to bottom, black 0%, black 59%, transparent 69%);
+  mask-composite: intersect;
+}
+
+.scrolling-quote.option-mode {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.scrolling-quote.option-mode .scroll-line {
+  max-width: 150vw;
+}
+
+.scrolling-quote.terminal-mode {
+  display: none;
+}
+
+.scroll-canvas {
+  position: absolute;
+  top: -40%; left: -40%;
+  width: 280%; height: 280%;
+  transform: rotate(9deg);
+}
+
+.scroll-lines-wrapper {
+  animation: scroll-quote-loop 120s linear infinite;
+}
+
+.scroll-line {
+  white-space: normal;
+  font-family: var(--font-stack);
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--md-sys-color-hello-text);
+  opacity: 0.28;
+  max-width: 95vw;
+}
+
+@keyframes scroll-quote-loop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateY(-50%); }
+}
